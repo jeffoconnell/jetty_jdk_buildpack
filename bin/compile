@@ -4,7 +4,7 @@
 # fail fast
 set -e
 
-logger -p user.notice -t "slugc[$$]" "language_pack_java java_compile_start"
+logger -p user.notice -t "slugc[$$]" "jetty_jdk_pack java_compile_start"
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 # parse args
@@ -31,4 +31,9 @@ PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 sudo mkdir -p $(dirname $PROFILE_PATH)
 echo 'export JAVA_HOME="/usr/lib/jvm/java-7-oracle"' >> $PROFILE_PATH
 
-logger -p user.notice -t "slugc[$$]" "language_pack_java java_compile_end $LOGGER_FLAGS"
+logger -p user.notice -t "slugc[$$]" "jetty_jdk_pack java_compile_end $LOGGER_FLAGS"
+logger -p user.notice -t "slugc[$$]" "jetty_jdk_pack jetty_install_start"
+
+sudo apt-get install -y jetty
+
+logger -p user.notice -t "slugc[$$]" "jetty_jdk_pack jetty_install_end $LOGGER_FLAGS"
